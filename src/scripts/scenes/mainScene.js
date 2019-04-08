@@ -1,5 +1,5 @@
-import PhaserLogo from '../objects/phaserLogo'
-import FpsText from '../objects/fpsText'
+import Player from '../objects/Player'
+import Pnj from '../objects/Pnj'
 
 export default class MainScene extends Phaser.Scene {
 
@@ -21,60 +21,17 @@ export default class MainScene extends Phaser.Scene {
     // this.platforms = this.physics.add.staticGroup();
     // this.platforms.create(800, 0, 'wall').setOrigin(0, 0).setScale(2).refreshBody();
 
-    //PNJ
-    // this.pnj = this.physics.add.staticGroup();
-    // this.pnj.create(300, ground, 'gaia').setFrame(9).setInteractive().setBounce(0);
-    this.pnj = this.physics.add.sprite(1200, ground, 'gaia').setFrame(9).setInteractive();
-    this.pnj.body.setImmovable(true);
-    this.pnj.body.setAllowGravity(false);
-    this.pnj.on('pointerdown', this.dialogGaia);
-
     //PLAYER
-    this.player = this.physics.add.sprite(110, ground, 'sparadra').setFrame(6);
-    this.player.body.setAllowGravity(false);
+    this.player = new Player(this, 110, ground);
 
-    this.physics.add.collider(this.player, this.pnj);
+    //PNJ
+    this.gaia = new Pnj(this, 1200, ground, 'gaia', this.player);
+    this.gaia.on('pointerdown', this.dialogGaia);
 
-
-    this.anims.create({
-      key: 'right',
-      frames: this.anims.generateFrameNumbers('sparadra', { start: 0, end: 7 }),
-      frameRate: 10,
-      repeat: -1
-    });
-
-    this.anims.create({
-      key: 'left',
-      frames: this.anims.generateFrameNumbers('sparadra', { start: 8, end: 15 }),
-      frameRate: 10,
-      repeat: -1
-    });
-
-    this.cursors = this.input.keyboard.createCursorKeys();
   }
 
   update() {
-
-    if (typeof this.currentAnim === 'undefined') {
-      this.currentAnim = 'right';
-    }
-
-    if (this.cursors.left.isDown) {
-      this.player.setVelocityX(-160);
-      this.currentAnim = 'left';
-      this.player.anims.play(this.currentAnim, true);
-    }
-    else if (this.cursors.right.isDown) {
-      this.player.setVelocityX(160);
-      this.currentAnim = 'right';
-      this.player.anims.play(this.currentAnim, true);
-    }
-    else {
-      this.player.setVelocityX(0);
-
-      this.player.anims.play(this.currentAnim, true);
-      //this.player.anims.stop();
-    }
+    this.player.update();
   }
 
   dialogGaia(pointer, object) {

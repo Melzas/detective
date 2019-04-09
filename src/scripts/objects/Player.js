@@ -1,4 +1,4 @@
-let playerTarget = new Phaser.Math.Vector2();
+let playerDestination = new Phaser.Math.Vector2();
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
@@ -26,27 +26,27 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
     var object = this;
     scene.input.on('pointerdown', function (pointer) {
-      playerTarget.x = pointer.x;
-      playerTarget.y = y;
+      playerDestination.x = pointer.x;
+      playerDestination.y = y;
 
       scene.physics.moveTo(object, pointer.x, y, 160);
     });
   }
 
   update() {
-    let distance = Phaser.Math.Distance.Between(this.body.center.x, this.body.center.y, playerTarget.x, playerTarget.y);
+    let distance = Phaser.Math.Distance.Between(this.body.center.x, this.body.center.y, playerDestination.x, playerDestination.y);
 
     if (typeof this.currentAnim === 'undefined') {
       this.currentAnim = 'right';
     }
 
     if (this.body.speed > 0) {
-      if (this.body.center.x > playerTarget.x) {
+      if (this.body.center.x > playerDestination.x) {
         this.setVelocityX(-160);
         this.currentAnim = 'left';
         this.anims.play(this.currentAnim, true);
       }
-      else if (this.body.center.x <= playerTarget.x) {
+      else if (this.body.center.x <= playerDestination.x) {
         this.setVelocityX(160);
         this.currentAnim = 'right';
         this.anims.play(this.currentAnim, true);
@@ -59,7 +59,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
       }
 
       if (distance < 4) {
-        this.body.reset(playerTarget.x, playerTarget.y);
+        this.body.reset(playerDestination.x, playerDestination.y);
       }
     }
   }

@@ -1,5 +1,6 @@
 import Player from '../objects/Player'
 import Pnj from '../objects/Pnj'
+import Inventory from '../objects/Inventory';
 
 export default class MainScene extends Phaser.Scene {
 
@@ -12,6 +13,7 @@ export default class MainScene extends Phaser.Scene {
 
     //BG
     this.add.image(0, 0, 'forest1').setOrigin(0, 0);
+    this.inventory = new Inventory(this);
 
     //AUDIO
     let music = this.sound.add('bg');

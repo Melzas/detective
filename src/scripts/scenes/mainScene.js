@@ -14,9 +14,11 @@ export default class MainScene extends Phaser.Scene {
     //BG
     this.add.image(0, 0, 'forest1').setOrigin(0, 0);
     this.inventory = new Inventory(this);
+    this.inventory.addItem('currency');
+    this.inventory.addItem('currency');
 
     //AUDIO
-    let music = this.sound.add('bg');
+    //let music = this.sound.add('bg');
     //music.play();
 
     //PLATFORMS

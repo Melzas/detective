@@ -1,34 +1,26 @@
 {
-  "name": "phaser-project-template-es6",
+  "name": "detective-of-the-dead",
   "version": "1.0.0",
-  "description": "Phaser 3 starter template with ES6 and webpack.",
-  "homepage": "https://github.com/yandeu/phaser-project-template-es6#readme",
+  "description": "Détective of the dead",
+  "homepage": "https://github.com/Melzas/detective#readme",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config webpack/webpack.dev.js",
     "build": "webpack --config webpack/webpack.prod.js"
   },
-  "keywords": [
-    "Phaser",
-    "Phaser 3",
-    "Phaser3",
-    "html5 game",
-    "TypeScript",
-    "webpack",
-    "starter"
-  ],
+  "keywords": [],
   "author": {
-    "name": "Yannick Deubel",
-    "url": "https://github.com/yandeu"
+    "name": "Anthony Chapelle",
+    "url": "https://github.com/Melzas"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yandeu/phaser-project-template-es6.git"
+    "url": "https://github.com/Melzas/detective.git"
   },
   "template": {
-    "name": "phaser-project-template-es6",
-    "url": "https://github.com/yandeu/phaser-project-template-es6",
-    "author": "Yannick Deubel (https://github.com/yandeu)"
+    "name": "detective-of-the-dead",
+    "url": "https://github.com/Melzas/detective",
+    "author": "Anthony Chapelle (https://github.com/Melzas)"
   },
   "engines": {
     "node": ">=8.0.0"

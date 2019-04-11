@@ -1,9 +1,13 @@
+import DropZone from "./DropZone";
+
 const pnjs = [
   {
     key: 'gaia',
     defaultFrame: 9
   }
 ];
+
+let pnjsZones = [];
 
 export default class Pnj extends Phaser.Physics.Arcade.Sprite {
 
@@ -22,12 +26,17 @@ export default class Pnj extends Phaser.Physics.Arcade.Sprite {
       this.setFrame(item.defaultFrame).setInteractive();
       this.body.setImmovable(true);
       this.body.setAllowGravity(false);
+
+      let dz = new DropZone();
+      dz.add(scene, this);
+
+      scene.physics.add.collider(player, this);
     }
 
-    scene.physics.add.collider(player, this);
   }
 
   update() {
 
   }
+
 }

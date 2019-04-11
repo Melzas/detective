@@ -13,8 +13,6 @@ export default class MainScene extends Phaser.Scene {
 
     //BG
     let bg = this.add.image(0, 0, 'forest1').setOrigin(0, 0).setInteractive();
-    this.inventory = new Inventory(this);
-    this.inventory.addItem('currency');
     // this.inventory.addItem('currency');
     // this.inventory.addItem('currency');
     // this.inventory.addItem('currency');
@@ -36,6 +34,9 @@ export default class MainScene extends Phaser.Scene {
     this.gaia = new Pnj(this, 1200, ground, 'gaia', this.player);
     this.gaia.on('pointerdown', this.dialogGaia);
 
+    //INVENTORY
+    this.inventory = new Inventory(this);
+    this.inventory.addItem('currency');
   }
 
   update() {

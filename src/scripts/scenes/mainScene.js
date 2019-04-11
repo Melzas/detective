@@ -12,10 +12,14 @@ export default class MainScene extends Phaser.Scene {
     const ground = 520;
 
     //BG
-    this.add.image(0, 0, 'forest1').setOrigin(0, 0);
+    let bg = this.add.image(0, 0, 'forest1').setOrigin(0, 0).setInteractive();
     this.inventory = new Inventory(this);
     this.inventory.addItem('currency');
-    this.inventory.addItem('currency');
+    // this.inventory.addItem('currency');
+    // this.inventory.addItem('currency');
+    // this.inventory.addItem('currency');
+    // this.inventory.addItem('currency');
+    // this.inventory.addItem('currency');
 
     //AUDIO
     //let music = this.sound.add('bg');
@@ -26,7 +30,7 @@ export default class MainScene extends Phaser.Scene {
     // this.platforms.create(800, 0, 'wall').setOrigin(0, 0).setScale(2).refreshBody();
 
     //PLAYER
-    this.player = new Player(this, 110, ground);
+    this.player = new Player(this, 110, ground, bg);
 
     //PNJ
     this.gaia = new Pnj(this, 1200, ground, 'gaia', this.player);

@@ -1,7 +1,7 @@
 let playerDestination = new Phaser.Math.Vector2();
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y) {
+  constructor(scene, x, y, bg) {
     super(scene, x, y, 'sparadra');
 
     scene.add.existing(this);
@@ -26,7 +26,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     });
 
     var object = this;
-    scene.input.on('pointerdown', function (pointer) {
+    bg.on('pointerdown', function (pointer) {
       playerDestination.x = pointer.x;
       playerDestination.y = y;
 

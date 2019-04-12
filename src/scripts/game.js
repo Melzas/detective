@@ -3,6 +3,7 @@ import '@babel/polyfill'
 
 import MainScene from './scenes/mainScene'
 import PreloadScene from './scenes/preloadScene'
+import DialogBox from './plugins/DialogBox'
 
 const DEFAULT_WIDTH = 1280
 const DEFAULT_HEIGHT = 720
@@ -17,6 +18,11 @@ const config = {
     height: DEFAULT_HEIGHT
   },
   scene: [PreloadScene, MainScene],
+  plugins: {
+    scene: [
+      { key: "dialogBox", plugin: DialogBox, mapping: "dialogBox" }
+    ]
+  },
   physics: {
     default: 'arcade',
     arcade: {

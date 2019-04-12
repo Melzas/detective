@@ -1,5 +1,6 @@
 import DropZone from "./DropZone";
 import Inventory from "./Inventory";
+import DialogBox from "../plugins/DialogBox";
 
 const pnjs = [
   {
@@ -46,10 +47,9 @@ export default class Pnj extends Phaser.Physics.Arcade.Sprite {
       this.setFrame(item.defaultFrame).setInteractive();
       this.body.setImmovable(true);
       this.body.setAllowGravity(false);
-      let dz = new DropZone();
-      dz.add(scene, this);
+      DropZone.add(this);
 
-      // console.log(this);
+      console.log(this);
 
       scene.physics.add.collider(player, this);
     }
@@ -80,29 +80,32 @@ export default class Pnj extends Phaser.Physics.Arcade.Sprite {
     );
 
     if (dialog) {
-      let padding = 15;
-      let x = this.x;
-      let y = this.y;
+      // this.item.scene.dialogBox.init();
 
-      let bubble = this.scene.make.text({
-        text: dialog.text,
-        // origin: { x: 0, y: 0 },
-        padding: { x: padding, y: padding },
-        style: {
-          font: '18px Arial',
-          fill: 'black',
-          backgroundColor: 'white',
-          wordWrap: { width: 300 }
-        }
-      });
+      // let padding = 15;
+      // let x = this.x;
+      // let y = this.y;
 
-      var graphics = this.scene.add.graphics({ fillStyle: { color: 0xffffff } });
-      var triangle = Phaser.Geom.Triangle.BuildEquilateral(x - this.width / 2 + 25, y - this.height / 2, 50);
-      Phaser.Geom.Triangle.Rotate(triangle, 45);
-      graphics.fillTriangleShape(triangle);
+      // let bubble = this.scene.make.text({
+      //   text: dialog.text,
+      //   // origin: { x: 0, y: 0 },
+      //   padding: { x: padding, y: padding },
+      //   style: {
+      //     stroke: '#000',
+      //     font: '18px Arial',
+      //     fill: 'black',
+      //     backgroundColor: 'white',
+      //     wordWrap: { width: 300 }
+      //   }
+      // });
 
-      bubble.setX(x - (bubble.width / 2));
-      bubble.setY(y - this.height / 2 - bubble.height + 25);
+      // var graphics = this.scene.add.graphics({ fillStyle: { color: 0xffffff } });
+      // var triangle = Phaser.Geom.Triangle.BuildEquilateral(x - this.width / 2 + 25, y - this.height / 2, 50);
+      // Phaser.Geom.Triangle.Rotate(triangle, 45);
+      // graphics.fillTriangleShape(triangle);
+
+      // bubble.setX(x - (bubble.width / 2));
+      // bubble.setY(y - this.height / 2 - bubble.height + 25);
       // console.log(bubble);
       // console.log(triangle.y1, bubble.height, triangle.y1 - bubble.height);
 

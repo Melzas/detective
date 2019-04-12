@@ -50,7 +50,4 @@ export default class InventoryItem extends Phaser.GameObjects.Sprite {
       });
     }
   }
-
-  update() {
-  }
 }

@@ -7,10 +7,10 @@ export default class DropZone {
   add(scene, object) {
     let zone = scene.add.zone(object.x, object.y, object.width, object.height).setRectangleDropZone(object.width, object.height);
     zone.depth = -1;
-    dropZones.push(zone);
+    dropZones.push({ target: object, item: zone });
   }
 
-  getItems() {
+  static getItems() {
     return dropZones;
   }
 }

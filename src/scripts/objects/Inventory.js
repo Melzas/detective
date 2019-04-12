@@ -15,14 +15,27 @@ export default class Inventory extends Phaser.GameObjects.Sprite {
     this.inventoryContainerY = 40;
   }
 
-  update() {
+  static getItems() {
+    return inventoryItems;
   }
 
-  addItem(texture) {
+  addItem(key) {
     let ml = (inventoryItems.length >= 1 ? 40 : 0);
     let x = this.inventoryContainerX + (inventoryItems.length * (150 + ml));
     //console.log(x, ml, inventoryItems.length);
-    let item = new InventoryItem(this.scene, x, this.inventoryContainerY, texture);
+    let item = new InventoryItem(this.scene, x, this.inventoryContainerY, key);
     inventoryItems.push(item);
+  }
+
+  static removeItem(item) {
+
+    var index = inventoryItems.indexOf(item);
+
+    if (index > -1) {
+      item.destroy();
+      inventoryItems.splice(index, 1);
+    }
+
+    // console.log(index, inventoryItems);
   }
 }

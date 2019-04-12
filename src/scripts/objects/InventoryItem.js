@@ -11,8 +11,7 @@ export default class InventoryItem extends Phaser.GameObjects.Sprite {
     // var graphics = scene.add.graphics();
     // graphics.lineStyle(2, 0xffff00);
     // graphics.strokeRect(zone.x - zone.input.hitArea.width / 2, zone.y - zone.input.hitArea.height / 2, zone.input.hitArea.width, zone.input.hitArea.height);
-    let dz = new DropZone();
-    let zones = dz.getItems();
+    let zones = DropZone.getItems();
 
     if (typeof zones !== 'undefined' && zones.length) {
       scene.input.setDraggable(this);
@@ -30,9 +29,10 @@ export default class InventoryItem extends Phaser.GameObjects.Sprite {
       let object = this;
       zones.forEach(function (zone) {
         object.on('drop', function (pointer) {
-          object.x = zone.x;
-          object.y = zone.y;
-          console.log(zone);
+          object.x = zone.item.x;
+          object.y = zone.item.y;
+          zone.target.onDrop(object);
+          // console.log(zone);
           // object.input.enabled = false;
         });
       });

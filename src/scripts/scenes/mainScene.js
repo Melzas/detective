@@ -31,8 +31,11 @@ export default class MainScene extends Phaser.Scene {
     this.player = new Player(this, 110, ground, bg);
 
     //PNJ
-    this.gaia = new Pnj(this, 1200, ground, 'gaia', this.player);
-    this.gaia.on('pointerdown', this.dialogGaia);
+    let gaia = new Pnj(this, 1200, ground, 'gaia', this.player);
+    gaia.on('pointerdown', function () {
+      gaia.dialog(1);
+    });
+    //gaia.dialog(2);
 
     //INVENTORY
     this.inventory = new Inventory(this);
@@ -41,32 +44,5 @@ export default class MainScene extends Phaser.Scene {
 
   update() {
     this.player.update();
-  }
-
-  dialogGaia(pointer, object) {
-    let padding = 15;
-    let x = this.x;
-    let y = this.y;
-
-    let bubble = this.scene.make.text({
-      x: x - 100,
-      text: "Tiens, Sparadra! Il paraît que tu enquêtes sur la disparition des smourbiffs. J'peux te donner une info gratuitement si tu me rapportes 1.000 crédits <3",
-      origin: { x: 0.5, y: 0.5 },
-      padding: { left: padding, top: padding, right: padding, bottom: padding },
-      style: {
-        font: '18px Arial',
-        fill: 'black',
-        backgroundColor: 'white',
-        wordWrap: { width: 300 }
-      }
-    });
-
-    var graphics = this.scene.add.graphics({ fillStyle: { color: 0xffffff } });
-    var triangle = Phaser.Geom.Triangle.BuildEquilateral(x - 30, y - 100, 50);
-    Phaser.Geom.Triangle.Rotate(triangle, 45);
-    graphics.fillTriangleShape(triangle);
-
-    bubble.setY(y - bubble.height);
-    //console.log(bubble);
   }
 }

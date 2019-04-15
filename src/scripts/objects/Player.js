@@ -25,12 +25,12 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
       repeat: -1
     });
 
-    var object = this;
+    var self = this;
     bg.on('pointerdown', function (pointer) {
       playerDestination.x = pointer.x;
       playerDestination.y = y;
 
-      scene.physics.moveTo(object, pointer.x, y, 160);
+      scene.physics.moveTo(self, pointer.x, y, 160);
     });
   }
 

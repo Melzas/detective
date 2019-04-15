@@ -39,6 +39,7 @@ export default class DialogBox extends Phaser.Plugins.ScenePlugin {
 
         this.eventCounter = 0;
         this.visible = true;
+        this.owner;
         this.text;
         this.dialog;
         this.graphics;
@@ -65,14 +66,36 @@ export default class DialogBox extends Phaser.Plugins.ScenePlugin {
         }
     }
 
+    // Calcuate the position of the text in the dialog window
+    setOwner(owner) {
+        // Reset the dialog
+        if (this.owner) this.owner.destroy();
+
+        var x = this.padding + 10;
+        var y = this._getGameHeight() - this.windowHeight - this.padding + 10;
+
+        this.owner = this.scene.make.text({
+            x,
+            y,
+            text: owner,
+            style: {
+                color: '#FFCF00',
+                font: "25px Times New Roman",
+                wordWrap: { width: this._getGameWidth() - (this.padding * 2) - 25 }
+            }
+        });
+    }
+
     // Sets the text for the dialog window
     setText(text, animate) {
+        if (this.owner) text = "\n" + text;
         // Reset the dialog
         this.eventCounter = 0;
         this.dialog = text.split('');
         if (this.timedEvent) this.timedEvent.remove();
 
         var tempText = animate ? '' : text;
+
         this._setText(tempText);
 
         if (animate) {
@@ -98,6 +121,7 @@ export default class DialogBox extends Phaser.Plugins.ScenePlugin {
             y,
             text,
             style: {
+                font: "25px Times New Roman",
                 wordWrap: { width: this._getGameWidth() - (this.padding * 2) - 25 }
             }
         });
@@ -172,6 +196,7 @@ export default class DialogBox extends Phaser.Plugins.ScenePlugin {
             }
         });
         this.closeBtn.setInteractive();
+        this.closeBtn.depth = 10;
 
         this.closeBtn.on("pointerover", function () {
             this.setTint(0xff0000);
@@ -182,6 +207,7 @@ export default class DialogBox extends Phaser.Plugins.ScenePlugin {
         this.closeBtn.on("pointerdown", function () {
             self.toggleWindow();
             if (self.timedEvent) self.timedEvent.remove();
+            if (self.owner) self.owner.destroy();
             if (self.text) self.text.destroy();
         });
     }

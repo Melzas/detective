@@ -1,10 +1,10 @@
 import DropZone from "./DropZone";
 import Inventory from "./Inventory";
-import DialogBox from "../plugins/DialogBox";
 
 const pnjs = [
   {
     key: 'gaia',
+    name: 'Gaia',
     defaultFrame: 9,
     dialogs: [
       {
@@ -49,7 +49,7 @@ export default class Pnj extends Phaser.Physics.Arcade.Sprite {
       this.body.setAllowGravity(false);
       DropZone.add(this);
 
-      console.log(this);
+      //console.log(this);
 
       scene.physics.add.collider(player, this);
     }
@@ -72,6 +72,7 @@ export default class Pnj extends Phaser.Physics.Arcade.Sprite {
   }
 
   dialog(id) {
+    //console.log(this.item.name);
 
     let dialog = this.item.dialogs.find(
       (itemObject) => {
@@ -80,7 +81,14 @@ export default class Pnj extends Phaser.Physics.Arcade.Sprite {
     );
 
     if (dialog) {
-      // this.item.scene.dialogBox.init();
+
+      console.log(this.scene.dialogBox.visible);
+      if (typeof this.scene.dialogBox.visible === 'undefined' || this.scene.dialogBox.visible === false) {
+        this.scene.dialogBox.init();
+      }
+      this.scene.dialogBox.setOwner(this.item.name);
+      this.scene.dialogBox.setText(dialog.text, true);
+      console.log(this.scene.dialogBox.visible);
 
       // let padding = 15;
       // let x = this.x;

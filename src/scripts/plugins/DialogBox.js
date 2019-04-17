@@ -35,7 +35,7 @@ export default class DialogBox extends Phaser.Plugins.ScenePlugin {
         this.windowHeight = opts.windowHeight || 150;
         this.padding = opts.padding || 32;
         this.closeBtnColor = opts.closeBtnColor || "darkgoldenrod";
-        this.dialogSpeed = opts.dialogSpeed || 3;
+        this.dialogSpeed = opts.dialogSpeed || 6;
 
         this.eventCounter = 0;
         this.visible = true;

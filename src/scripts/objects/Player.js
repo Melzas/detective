@@ -1,14 +1,14 @@
 let playerDestination = new Phaser.Math.Vector2();
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y, bg) {
+  constructor(scene, x, y, bg, defaultFrame) {
     super(scene, x, y, 'sparadra');
 
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
     //Settings
-    this.setFrame(6);
+    this.setFrame(defaultFrame || 0);
     this.body.setAllowGravity(false);
 
     scene.anims.create({

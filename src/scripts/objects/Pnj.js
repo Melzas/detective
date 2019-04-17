@@ -13,14 +13,26 @@ const pnjs = [
       },
       {
         id: 2,
-        text: "Merci !",
+        text: "Merci ! Va au nord de la forêt, il y a une cascade. Tu en trouveras surement un !",
       }
     ],
     drops: [
       {
         key: 'currency',
-        callback: function (object) {
-          object.dialog(2);
+        callback: function (self) {
+          self.dialog(2);
+
+          console.log(self.scene.directions);
+          let item = self.scene.directions.find(
+            (itemObject) => {
+              return itemObject.texture.key === 'arrowTop';
+            }
+          );
+
+          if (item) {
+            item.visible = true;
+          }
+
           return true;
         }
       }
@@ -59,12 +71,16 @@ export default class Pnj extends Phaser.Physics.Arcade.Sprite {
   onDrop(object) {
     let key = object.texture.key;
 
+    //On check si l'item dropped existe parmi les items recevable du PNJ
     let drop = this.item.drops.find(
       (itemObject) => {
         return itemObject.key === key;
       }
     );
+
+    //Si c'est le cas
     if (drop) {
+      //On execute la fonction associé
       if (drop.callback(this)) {
         Inventory.removeItem(object);
       }
@@ -81,41 +97,11 @@ export default class Pnj extends Phaser.Physics.Arcade.Sprite {
     );
 
     if (dialog) {
-
-      console.log(this.scene.dialogBox.visible);
       if (typeof this.scene.dialogBox.visible === 'undefined' || this.scene.dialogBox.visible === false) {
         this.scene.dialogBox.init();
       }
       this.scene.dialogBox.setOwner(this.item.name);
       this.scene.dialogBox.setText(dialog.text, true);
-      console.log(this.scene.dialogBox.visible);
-
-      // let padding = 15;
-      // let x = this.x;
-      // let y = this.y;
-
-      // let bubble = this.scene.make.text({
-      //   text: dialog.text,
-      //   // origin: { x: 0, y: 0 },
-      //   padding: { x: padding, y: padding },
-      //   style: {
-      //     stroke: '#000',
-      //     font: '18px Arial',
-      //     fill: 'black',
-      //     backgroundColor: 'white',
-      //     wordWrap: { width: 300 }
-      //   }
-      // });
-
-      // var graphics = this.scene.add.graphics({ fillStyle: { color: 0xffffff } });
-      // var triangle = Phaser.Geom.Triangle.BuildEquilateral(x - this.width / 2 + 25, y - this.height / 2, 50);
-      // Phaser.Geom.Triangle.Rotate(triangle, 45);
-      // graphics.fillTriangleShape(triangle);
-
-      // bubble.setX(x - (bubble.width / 2));
-      // bubble.setY(y - this.height / 2 - bubble.height + 25);
-      // console.log(bubble);
-      // console.log(triangle.y1, bubble.height, triangle.y1 - bubble.height);
 
       if (typeof dialog.callback !== 'undefined') {
         dialog.callback();

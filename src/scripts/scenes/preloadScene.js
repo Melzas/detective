@@ -30,11 +30,20 @@ export default class PreloadScene extends Phaser.Scene {
 
     this.load.image('logo', 'assets/images/logo.png');
 
+    //DIRECTIONS
+    this.load.image('arrowTop', 'assets/images/arrow-top.png');
+    this.load.image('arrowRight', 'assets/images/arrow-right.png');
+
+    //BACKGROUND
     this.load.image('forest1', 'assets/images/forest1.jpg');
-    // this.load.image('forest2', 'assets/images/forest2.jpg');
+    this.load.image('waterfall', 'assets/images/waterfall.jpg');
     // this.load.image('wall', 'assets/images/walli.png');
+
+    //INVENTORY
     this.load.image('inventory', 'assets/images/inventory.png');
     this.load.image('currency', 'assets/images/currency.png');
+
+    //CHARACTERS
     this.load.spritesheet('sparadra', 'assets/images/sparadra.png', { frameWidth: 200, frameHeight: 200 });
     this.load.spritesheet('gaia', 'assets/images/gaia.png', { frameWidth: 150, frameHeight: 200 });
 

@@ -7,6 +7,8 @@ export default class Inventory extends Phaser.GameObjects.Sprite {
     super(scene, 0, 0, 'inventory');
 
     this.scene = scene;
+    this.depth = 1;
+
     scene.add.existing(this);
 
     this.setOrigin(0, 0).setInteractive();

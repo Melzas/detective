@@ -80,7 +80,7 @@ export default class PreloadScene extends Phaser.Scene {
     const height = this.cameras.main.height;
 
     //this.scene.start("MainScene");
-    const music = this.sound.add('prelude').setLoop(true)
+    const music = this.sound.add('prelude').setLoop(true);
     music.play();
 
     this.add.image(width / 2, height / 2 - 50, 'logo');

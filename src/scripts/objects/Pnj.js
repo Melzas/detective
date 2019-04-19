@@ -13,7 +13,7 @@ const pnjs = [
       },
       {
         id: 2,
-        text: "Merci ! Va au nord de la forêt, il y a une cascade. Tu en trouveras surement un !",
+        text: "Merci ! Va au nord de la forêt, il y a une cascade. Tu en trouveras surement un !\n*ou pas*",
       }
     ],
     drops: [
@@ -22,18 +22,37 @@ const pnjs = [
         callback: function (self) {
           self.dialog(2);
 
-          console.log(self.scene.directions);
-          let item = self.scene.directions.find(
+          let arr = self.scene.places[self.scene.placeCurrentIndex].directionsObject;
+
+          // console.log(self.scene.places[self.scene.placeCurrentIndex].directionsObject);
+          let item = arr.find(
             (itemObject) => {
               return itemObject.texture.key === 'arrowTop';
             }
           );
 
           if (item) {
-            item.visible = true;
+            let index = arr.findIndex((itemObject => itemObject.texture.key == 'arrowTop'));
+            arr[index].visible = true;
           }
 
           return true;
+        }
+      }
+    ],
+  },
+  {
+    key: 'smourbiff1',
+    name: 'Smourbiff',
+    dialogs: [
+      {
+        id: 1,
+        text: "Nop !",
+        callback: function (scene, item) {
+          setTimeout(function () {
+            scene.physics.moveTo(item, -9999, 600, 160);
+            scene.dialogBox.shutdown();
+          }, 1000);
         }
       }
     ],
@@ -97,14 +116,19 @@ export default class Pnj extends Phaser.Physics.Arcade.Sprite {
     );
 
     if (dialog) {
+
       if (typeof this.scene.dialogBox.visible === 'undefined' || this.scene.dialogBox.visible === false) {
         this.scene.dialogBox.init();
+      }
+      else {
+        this.scene.dialogBox.graphics.visible = true;
+        this.scene.dialogBox.closeBtn.visible = true;
       }
       this.scene.dialogBox.setOwner(this.item.name);
       this.scene.dialogBox.setText(dialog.text, true);
 
       if (typeof dialog.callback !== 'undefined') {
-        dialog.callback();
+        dialog.callback(this.scene, this);
       }
     }
   }

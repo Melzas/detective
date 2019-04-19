@@ -27,10 +27,10 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
     var self = this;
     bg.on('pointerdown', function (pointer) {
-      playerDestination.x = pointer.x;
+      playerDestination.x = pointer.worldX;
       playerDestination.y = y;
 
-      scene.physics.moveTo(self, pointer.x, y, 160);
+      scene.physics.moveTo(self, playerDestination.x, y, 160);
     });
   }
 
@@ -52,16 +52,14 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         this.currentAnim = 'right';
         this.anims.play(this.currentAnim, true);
       }
-      else {
-        this.setVelocityX(0);
-
-        this.anims.play(this.currentAnim, true);
-        //this.anims.stop();
-      }
 
       if (distance < 4) {
         this.body.reset(playerDestination.x, playerDestination.y);
       }
+    }
+    else {
+      // this.anims.play(this.currentAnim, true);
+      // this.anims.stop();
     }
   }
 }

@@ -11,7 +11,7 @@ export default class Inventory extends Phaser.GameObjects.Sprite {
 
     scene.add.existing(this);
 
-    this.setOrigin(0, 0).setInteractive();
+    this.setOrigin(0, 0).setInteractive().setScrollFactor(0);
 
     this.inventoryContainerX = 90;
     this.inventoryContainerY = 40;

@@ -12,7 +12,10 @@ export default class DialogBox extends Phaser.Plugins.ScenePlugin {
     // Called when a Scene shuts down, it may then come back again later
     // (which will invoke the "start" event) but should be considered dormant.
     shutdown() {
+        this.graphics.visible = false;
+        this.closeBtn.visible = false;
         if (this.timedEvent) this.timedEvent.remove();
+        if (this.owner) this.owner.destroy();
         if (this.text) this.text.destroy();
     }
 
@@ -84,6 +87,8 @@ export default class DialogBox extends Phaser.Plugins.ScenePlugin {
                 wordWrap: { width: this._getGameWidth() - (this.padding * 2) - 25 }
             }
         });
+        this.owner.setScrollFactor(0);
+        this.owner.depth = 10;
     }
 
     // Sets the text for the dialog window
@@ -125,6 +130,8 @@ export default class DialogBox extends Phaser.Plugins.ScenePlugin {
                 wordWrap: { width: this._getGameWidth() - (this.padding * 2) - 25 }
             }
         });
+        this.text.setScrollFactor(0);
+        this.text.depth = 10;
     }
 
     // Creates the dialog window
@@ -132,7 +139,8 @@ export default class DialogBox extends Phaser.Plugins.ScenePlugin {
         var gameHeight = this._getGameHeight();
         var gameWidth = this._getGameWidth();
         var windowDimensions = this._calculateWindowDimensions(gameWidth, gameHeight);
-        this.graphics = this.scene.add.graphics();
+        this.graphics = this.scene.add.graphics().setScrollFactor(0);
+        this.graphics.depth = 10;
 
         this._createOuterWindow(windowDimensions);
         this._createInnerWindow(windowDimensions);
@@ -195,7 +203,7 @@ export default class DialogBox extends Phaser.Plugins.ScenePlugin {
                 fill: this.closeBtnColor
             }
         });
-        this.closeBtn.setInteractive();
+        this.closeBtn.setInteractive().setScrollFactor(0);
         this.closeBtn.depth = 10;
 
         this.closeBtn.on("pointerover", function () {

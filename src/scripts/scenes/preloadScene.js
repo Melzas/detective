@@ -47,8 +47,13 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.spritesheet('sparadra', 'assets/images/sparadra.png', { frameWidth: 200, frameHeight: 200 });
     this.load.spritesheet('gaia', 'assets/images/gaia.png', { frameWidth: 150, frameHeight: 200 });
 
-    // this.load.audio('opening', ['assets/audio/opening.mp3']);
-    // this.load.audio('bg', ['assets/audio/scene2.mp3']);
+    //SMOURBIFFS
+    this.load.image('smourbiff1', 'assets/images/smourbiff1.png');
+
+    //AUDIO
+    this.load.audio('prelude', ['assets/audio/prelude.mp3']);
+    this.load.audio('forest', ['assets/audio/forest.mp3']);
+    this.load.audio('waterfall', ['assets/audio/waterfall.mp3']);
 
     const progressBar = this.add.graphics();
     const progressBox = this.add.graphics();
@@ -74,9 +79,9 @@ export default class PreloadScene extends Phaser.Scene {
     const width = this.cameras.main.width;
     const height = this.cameras.main.height;
 
-    this.scene.start("MainScene");
-    //const music = this.sound.add('opening').setLoop(true)
-    //music.play();
+    //this.scene.start("MainScene");
+    const music = this.sound.add('prelude').setLoop(true)
+    music.play();
 
     this.add.image(width / 2, height / 2 - 50, 'logo');
 
@@ -85,7 +90,7 @@ export default class PreloadScene extends Phaser.Scene {
       .on('pointerdown', () => {
         //console.log(this.scene);
         this.scene.start("MainScene");
-        //music.stop()
+        music.stop()
       })
 
   }

@@ -8,12 +8,19 @@ export default class MainScene extends Phaser.Scene {
   }
 
   create() {
-    this.place = new Place(this, 'forest');
-    // const place = new Place(this, 'waterfall');
+    let self = this;
 
-    //AUDIO
-    //let music = this.sound.add('bg');
-    //music.play();
+    //List of places
+    this.places = new Array();
+    let places = Place.getItems();
+    places.forEach(function (place) {
+      self.places.push(place);
+    });
+
+
+    // console.log(this.places);
+    this.place = new Place(this, 'forest');
+    //this.place = new Place(this, 'waterfall');
 
     //INVENTORY
     this.inventory = new Inventory(this);
@@ -21,6 +28,6 @@ export default class MainScene extends Phaser.Scene {
   }
 
   update() {
-    this.place.update();
+    this.place.update(this);
   }
 }
